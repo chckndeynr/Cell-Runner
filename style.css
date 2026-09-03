@@ -1,0 +1,321 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: #07131f;
+	font-family: Arial, sans-serif;
+	color: white;
+}
+
+canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+#hud {
+	position: fixed;
+	top: 18px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	z-index: 5;
+	pointer-events: none;
+}
+
+.score {
+	background: rgba(4,12,23,.7);
+	padding: 8px 13px;
+	border-radius: 12px;
+	font-size: 14px;
+	font-weight: bold;
+	backdrop-filter: blur(6px);
+}
+
+.score span {
+	color: #7de7ff;
+}
+
+.bars {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	width: 80px;
+}
+
+.bar {
+	height: 6px;
+	background: rgba(255,255,255,.15);
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+#health {
+	height: 100%;
+	width: 100%;
+	background: #4ade80;
+}
+
+#energy {
+	height: 100%;
+	width: 100%;
+	background: #facc15;
+}
+
+#immuneTimer {
+	position: fixed;
+	top: 75px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 6;
+	font-size: 14px;
+	font-weight: bold;
+	opacity: 0;
+	transition: .2s;
+	pointer-events: none;
+	text-shadow: 0 2px 5px #000;
+}
+
+#pauseButton {
+	position: fixed;
+	top: 18px;
+	right: 18px;
+	z-index: 10;
+	width: 38px;
+	height: 38px;
+	border: 0;
+	border-radius: 12px;
+	background: rgba(4,12,23,.7);
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+	backdrop-filter: blur(6px);
+}
+
+#message {
+	position: fixed;
+	top: 105px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 6;
+	font-size: 14px;
+	font-weight: bold;
+	opacity: 0;
+	transition: .2s;
+	pointer-events: none;
+	text-shadow: 0 2px 5px #000;
+}
+
+.overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(3,10,18,.88);
+	text-align: center;
+	padding: 20px;
+}
+
+.panel {
+	width: min(430px,100%);
+	max-height: 100%;
+	overflow-y: auto;
+	padding: 10px 0;
+}
+
+.logo {
+	font-size: 70px;
+	margin-bottom: 5px;
+}
+
+.panel h1 {
+	font-size: clamp(42px,10vw,70px);
+	margin: 0;
+	letter-spacing: 3px;
+}
+
+.subtitle {
+	margin: 8px 0 30px;
+	font-size: 14px;
+	letter-spacing: 2px;
+	color: #9fb2c7;
+}
+
+.highscore {
+	font-size: 17px;
+	color: #ffd84d;
+	margin-bottom: 28px;
+}
+
+.controls {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-bottom: 25px;
+	flex-wrap: wrap;
+}
+
+.controlInfo {
+	padding: 10px 13px;
+	border-radius: 10px;
+	background: rgba(255,255,255,.06);
+	font-size: 12px;
+	color: #cbd5e1;
+}
+
+.mainButton {
+	border: 0;
+	border-radius: 13px;
+	padding: 14px 38px;
+	background: #1687d9;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.mainButton:hover {
+	filter: brightness(1.15);
+}
+
+.smallText {
+	margin-top: 18px;
+	font-size: 12px;
+	color: #718096;
+	line-height: 1.5;
+}
+
+.gameOverImage {
+	display: block;
+	width: min(260px,80%);
+	max-height: 180px;
+	object-fit: contain;
+	margin: 0 auto 5px;
+	border-radius: 15px;
+}
+
+.gameoverScore {
+	font-size: 22px;
+	margin: 20px 0 25px;
+}
+
+.gameoverScore strong {
+	color: #7de7ff;
+}
+
+.tip {
+	font-size: 12px;
+	color: #9fb2c7;
+	margin: 0 auto 20px;
+	max-width: 350px;
+	line-height: 1.5;
+}
+
+.appreciation {
+	margin: 0 auto 20px;
+	max-width: 360px;
+	font-size: 12px;
+	color: #9fb2c7;
+	line-height: 1.5;
+}
+
+.hidden {
+	display: none;
+}
+
+#mobileControls {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+	display: none;
+}
+
+.controlRow {
+	display: flex;
+	justify-content: center;
+}
+
+.mobileButton {
+	width: 54px;
+	height: 54px;
+	margin: 3px;
+	border: 0;
+	border-radius: 14px;
+	background: rgba(255,255,255,.12);
+	color: white;
+	font-size: 20px;
+	touch-action: none;
+}
+
+.developer {
+	position: fixed;
+	bottom: 6px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 30;
+	font-size: 9px;
+	color: rgba(255,255,255,.25);
+	letter-spacing: .5px;
+	pointer-events: none;
+}
+
+@media(max-width:700px) {
+
+	#hud {
+		top: 12px;
+		gap: 7px;
+	}
+
+	.score {
+		padding: 7px 9px;
+		font-size: 12px;
+	}
+
+	.bars {
+		width: 55px;
+	}
+
+	#pauseButton {
+		top: 12px;
+		right: 12px;
+	}
+
+	#mobileControls {
+		display: block;
+	}
+
+	.logo {
+		font-size: 60px;
+	}
+
+	.panel h1 {
+		font-size: 45px;
+	}
+
+	.controls {
+		gap: 5px;
+	}
+
+	.controlInfo {
+		font-size: 11px;
+		padding: 8px;
+	}
+
+	.gameOverImage {
+		width: min(230px,75%);
+		max-height: 140px;
+	}
+
+}
